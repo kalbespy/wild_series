@@ -1,0 +1,53 @@
+{% block nav %}
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<img class="pe-2" src="{{ asset('build/images/tv-show.png') }}" height="50">
+			<a class="navbar-brand" href="/">Wild Series</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" href="#">Mes favoris</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Categories
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li>
+								<a class="dropdown-item" href="#">Action</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Aventure</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Science Fiction</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Animation</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Acteurs
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li>
+								<a class="dropdown-item" href="#">Français</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Américain</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Papouasien</a>
+							</li>
+						</ul>
+					</li>
+					<a class="nav-link" href="#">Déconnexion</a>
+					<a class="nav-link">John</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+{% endblock %}
