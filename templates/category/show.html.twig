@@ -1,17 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-	All programs
+{% block title %}Category:
+	{{ categoryName }}
 {% endblock %}
 
 {% block body %}
-	<h1>Toutes les séries de la table program :
+	<h1>Toutes les séries de la categorie
+		{{ categoryName }}:
 	</h1>
 
 	{% for program in programs %}
 		<div>
 			<h2>{{ loop.index }}
-				/
+				/ID #:
+				{{ program.id }}
+				-
 				{{ program.title }}
 				- Catégorie :
 				{{ program.category.name }}
@@ -23,9 +26,5 @@
 	{% else %}
 		Aucune série trouvée.
 	{% endfor %}
-
-	<a href="{{ path('app_index') }}">
-		Retour à l'accueil
-	</a>
 
 {% endblock %}
