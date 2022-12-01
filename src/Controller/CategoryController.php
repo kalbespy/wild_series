@@ -28,6 +28,7 @@ class CategoryController extends AbstractController
     {
         $category = $categoryRepository->findOneBy(['name' => $categoryName]);
 
+
         if (!$category) {
             throw $this->createNotFoundException(
                 'No category with name : ' . $categoryName . ' found in category\'s table.'

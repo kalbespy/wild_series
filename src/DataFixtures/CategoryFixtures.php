@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 class CategoryFixtures extends Fixture
 {
 
-    public const CATEGORIES =[
+    public const CATEGORIES = [
         'Action',
         'Aventure',
         'Animation',

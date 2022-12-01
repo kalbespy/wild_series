@@ -7,22 +7,30 @@
 {% block body %}
 	<h1>Toutes les séries de la table program :
 	</h1>
-
-	{% for program in programs %}
-		<div>
-			<h2>{{ loop.index }}
-				/
-				{{ program.title }}
-				- Catégorie :
-				{{ program.category.name }}
-			</h2>
-			<p>{{ program.synopsis }}</p>
-			{# Lien vers la fiche de la série : #}
-			<a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
+	<div class="container">
+		<div class="d-flex flex-wrap p-2">
+			{% for program in programs %}
+				<div class="card m-3" style="width: 18rem;">
+					<img src="https://www.francetvinfo.fr/pictures/e_lojTVJe2SMSmn05NtRev0BLNA/1500x843/2021/08/03/phpxwl3vR.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">{{ program.title }}</h5>
+						<p class="card-text">{{ program.synopsis }}</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">{{ program.category.name }}</li>
+						<li class="list-group-item">{{ program.country }}</li>
+						<li class="list-group-item">{{ program.year }}</li>
+					</ul>
+					<div class="card-body">
+						<a href="{{ path("program_show", { id: program.id } ) }}" class=" card-link">Voir la fiche</a>
+						<a href="#" class="card-link">Another link</a>
+					</div>
+				</div>
+			{% else %}
+				Aucune série trouvée.
+			{% endfor %}
 		</div>
-	{% else %}
-		Aucune série trouvée.
-	{% endfor %}
+	</div>
 
 	<a href="{{ path('app_index') }}">
 		Retour à l'accueil

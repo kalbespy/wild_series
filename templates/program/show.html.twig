@@ -4,17 +4,41 @@
 {% endblock %}
 
 {% block body %}
-	<div class="media">
-		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
-		<div class="media-body">
-			<h1 class="mt-0">{{ program.title }}</h1>
-			<p>{{ program.synopsis }}</p>
-			<p>Catégorie :
-				{{ program.category.name }}</p>
-		</div>
-	</div>
+	<div class="media container">
+		<div class="d-flex flex-wrap p-2">
+			<figure class="figure">
+				<img class="figure-img img-fluid rounded m-2 " width='90%' src="https://www.francetvinfo.fr/pictures/e_lojTVJe2SMSmn05NtRev0BLNA/1500x843/2021/08/03/phpxwl3vR.jpg" alt="...">
+			</figure>
+			<div class="media-body">
+				<h1 class="mt-0">{{ program.title }}</h1>
+				<p>{{ program.synopsis }}</p>
+				<p>Catégorie :
+					{{ program.category.name }}</p>
 
-	<a href="{{ path('program_index') }}">
-		Retour à la liste des programmes
-	</a>
-{% endblock %}
+				{% for season in program.seasons %}
+					<div>
+						<h2>
+							Saisons :
+							{{ season.number }}
+						</h2>
+						<ul>
+							<li>{{ season.year }}</li>
+							<li>{{ season.description }}</li>
+							<li>
+								<a href="{{ path("program_season_show", { programId: program.id, seasonId: season.id }) }}">Voir le détail de la saison</a>
+							</li>
+						</ul>
+					{% else %}
+						<p>Aucune saison trouvée.</p>
+					{% endfor %}
+
+					<a href="{{ path('program_index') }}">
+						Retour à la liste des programmes
+					</a>
+				</div>
+
+			</div>
+		</div>
+
+
+	{% endblock %}
