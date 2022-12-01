@@ -22,25 +22,41 @@
 						{{ season.number }}
 					</h2>
 					<ul>
-						<li>{{ season.year }}</li>
-						<li>{{ season.description }}</li>
-						<li>Liste des épisodes</li>
+						<li>
+							<strong>Année:</strong>
+							{{ season.year }}</li>
+						<li>
+							<strong>Descritpion:
+							</strong>
+							{{ season.description }}</li>
+						<br>
+
+						<li>
+							<strong>Liste des épisodes</strong>
+						</li>
+						<br>
+
 						<ul>
 							{% for episode in season.episodes %}
-								<li>Episode:
-									{{ episode.number }}:
-									{{ episode.title }}
-									-
-									{{ episode.synopsis }}</li>
-							{% endfor %}
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul>
+								<li>
+									<strong>Episode:
+										{{ episode.number }}:</strong>
+									"{{ episode.title }}"
+									<br>
+									<br>
 
-		<a href="{{ path('program_index') }}">
-			Retour à la liste des programmes
-		</a>
-	</div>
-</div>{% endblock %}
+									{{ episode.synopsis }}</li>
+								<br>
+
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	<a href="{{ path('program_index') }}">
+		Retour à la liste des programmes
+	</a>
+</div></div>{% endblock %}
