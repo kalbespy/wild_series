@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Saisons #{{ program.id }}
+{% block title %}Saison #{{ season.number }}
 	de
 	{{ program.title }}
 {% endblock %}
@@ -43,12 +43,11 @@
 										{{ episode.number }}:</strong>
 									"{{ episode.title }}"
 									<br>
-									<br>
-
 									{{ episode.synopsis }}</li>
-								<br>
-
 							</li>
+							<li>
+								<a href="{{ path("program_episode_show", { program_id: program.id, season_id: season.id, episode_id: episode.id }) }}">Voir le détail de l'épisode</a>
+							</li><br>
 						{% endfor %}
 					</ul>
 				</li>
