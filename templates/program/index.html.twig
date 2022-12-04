@@ -7,6 +7,9 @@
 {% block body %}
 	<h1 class="m-4">Toutes les séries disponibles:
 	</h1>
+	<a href="/program/new">
+		Ajouter une nouvelle série
+	</a>
 	<div class="container">
 		<div class="d-flex flex-wrap p-2">
 			{% for program in programs %}
@@ -35,5 +38,4 @@
 	<a href="{{ path('app_index') }}">
 		Retour à l'accueil
 	</a>
-
 {% endblock %}
