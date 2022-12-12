@@ -20,19 +20,21 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
          * de te générer toutes les données que tu souhaites
          */
 
-        for ($i = 0; $i < 40; $i++) {
-            $season = new Season();
-            //Ce Faker va nous permettre d'alimenter l'instance de Season que l'on souhaite ajouter en base
-            $season->setNumber($faker->numberBetween(1, 10));
-            $season->setYear($faker->year());
-            $season->setDescription($faker->paragraphs(1, true));
+        $nbProgram = count(ProgramFixtures::PROGRAMS);
 
-            $season->setProgram($this->getReference('program_' . $faker->numberBetween(0, 7)));
+        for ($i = 0; $i < $nbProgram; $i++) {
+            for ($j = 1; $j < 6; $j++) {
 
-            $manager->persist($season);
-            $this->addReference('season_' . $i, $season);
+                $season = new Season();
+                //Ce Faker va nous permettre d'alimenter l'instance de Season que l'on souhaite ajouter en base
+                $season->setNumber($j);
+                $season->setYear($faker->year());
+                $season->setDescription($faker->paragraphs(1, true));
+                $season->setProgram($this->getReference('program_' . $i));
+                $manager->persist($season);
+                $this->addReference('program_' . $i . '_season_' . $j, $season);
+            }
         }
-
         $manager->flush();
     }
 

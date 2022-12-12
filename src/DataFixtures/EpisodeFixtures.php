@@ -15,14 +15,19 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 400; $i++) {
-            $episode = new Episode();
-            $episode->setSeason($this->getReference('season_' . $faker->numberBetween(0, 10)));
-            $episode->setTitle($faker->words(3, true));
-            $episode->setNumber($faker->numberBetween(1, 10));
-            $episode->setSynopsis($faker->paragraphs(1, true));
+        $nbProgram = count(ProgramFixtures::PROGRAMS);
 
-            $manager->persist($episode);
+        for ($i = 0; $i < $nbProgram; $i++) {
+            for ($j = 1; $j < 6; $j++) {
+                for ($k = 1; $k < 11; $k++) {
+                    $episode = new Episode();
+                    $episode->setTitle($faker->text(30, true));
+                    $episode->setNumber($k);
+                    $episode->setSynopsis($faker->paragraphs(1, true));
+                    $episode->setSeason($this->getReference('program_' . $i . '_season_' . $j));
+                    $manager->persist($episode);
+                }
+            }
         }
 
         $manager->flush();
