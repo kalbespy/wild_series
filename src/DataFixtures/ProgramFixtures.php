@@ -6,6 +6,7 @@ use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -21,6 +22,11 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ['Title' => 'Parc du sud', 'Synopsis' => "Des enfants et des jurons", 'poster' => 'https://sfractus-images.cleo.media/unsafe/0x400:1056x994/2000x0/images/South-Park-6123.jpg', 'country' => 'France', 'year' => '2000', 'Category' => 'Comedie',],
     ];
 
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public function load(ObjectManager $manager)
     {
         foreach (self::PROGRAMS as $key => $tvshow) {
@@ -31,6 +37,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setCountry($tvshow['country']);
             $program->setYear($tvshow['year']);
             $program->setCategory($this->getReference('category_' . $tvshow['Category']));
+            $slug = $this->slugger->slug($program->getTitle());
+            $program->setSlug($slug);
             $manager->persist($program);
             $this->addReference('program_' . $key, $program);
         }
