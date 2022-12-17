@@ -1,0 +1,22 @@
+{% extends 'layoutEmail.html.twig' %}
+
+{% block title %}Un nouvel épisode a été ajoutée à Wild Series !
+{% endblock %}
+
+{% block body %}
+	<h1>L'épisode
+		{{episode.title }}
+		a été ajouté</h1>
+	<p>Bonjour, l'épisode
+		{{episode.title }}
+		a été ajouté à la saison{{episode.season.number}}
+		de la série
+		{{ episode.season.program.title }}
+	</p>
+	<p>Synopsis :
+		{{ episode.synopsis }}</p>
+
+	<a href="https://localhost:8000/program/{{ episode.season.program.slug }}/seasons/{{episode.season.id}}">
+		Lien vers les épisodes de la série
+	</a>
+{% endblock %}
