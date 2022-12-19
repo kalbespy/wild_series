@@ -69,7 +69,7 @@ class ActorController extends AbstractController
     #[Route('/{id}', name: 'app_actor_delete', methods: ['POST'])]
     public function delete(Request $request, Actor $actor, ActorRepository $actorRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$actor->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $actor->getId(), $request->request->get('_token'))) {
             $actorRepository->remove($actor, true);
         }
 

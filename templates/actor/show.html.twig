@@ -17,6 +17,12 @@
 				<td>{{ actor.name }}</td>
 			</tr>
 			<tr>
+				<th>Photo</th>
+				<td>
+					<img class="figure-img img-fluid rounded m-2 " width='90%' src="{{ vich_uploader_asset(actor) }}" alt="{{ actor.name }}">
+				</td>
+			</tr>
+			<tr>
 				<th>Séries</th>
 				<td>
 					{% for program in actor.programs %}

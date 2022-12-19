@@ -25,7 +25,7 @@
 							<li>
 								{{ program.title }}
 								({{ program.year }}) -
-								<a href="{{ path('program_show', {'id': program.id}) }}">Voir la série</a>
+								<a href="{{ path('program_show', {slug: program.slug}) }}">Voir la série</a>
 							</li>
 
 						{% endfor %}
