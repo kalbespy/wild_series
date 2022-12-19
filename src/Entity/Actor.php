@@ -30,7 +30,7 @@ class Actor
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[Vich\UploadableField(mapping: 'actor_file', fileNameProperty: 'actor_file')]
+    #[Vich\UploadableField(mapping: 'actor_file', fileNameProperty: 'picture')]
     #[Assert\File(
         maxSize: '1M',
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'],
