@@ -20,6 +20,10 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ['Title' => 'Communauté', 'Synopsis' => "Des étudiants et du fun", 'poster' => 'https://m.media-amazon.com/images/I/91kbpBO5hhL._RI_.jpg', 'country' => 'France', 'year' => '2000', 'Category' => 'Comedie',],
         ['Title' => 'Blouses', 'Synopsis' => "Des étudiants et des patients", 'poster' => 'https://i.blogs.es/643f56/scrubs_hwhc/1366_2000.jpeg', 'country' => 'France', 'year' => '2000', 'Category' => 'Comedie',],
         ['Title' => 'Parc du sud', 'Synopsis' => "Des enfants et des jurons", 'poster' => 'https://sfractus-images.cleo.media/unsafe/0x400:1056x994/2000x0/images/South-Park-6123.jpg', 'country' => 'France', 'year' => '2000', 'Category' => 'Comedie',],
+        ['Title' => 'Des choses étranges', 'Synopsis' => "Des enfants et des monstres", 'poster' => 'strangerthings-639f154b6c478635877243.jpg', 'country' => 'US', 'year' => '2000', 'Category' => 'Comedie',],
+        ['Title' => 'Le pari de la reine', 'Synopsis' => "Une dame et des échecs", 'poster' => 'the-queens-gambit-639f155843907090507725.jpg', 'country' => 'US', 'year' => '2016', 'Category' => 'Comedie',],
+        ['Title' => 'L\'étendue', 'Synopsis' => "Des hommes et l'espace", 'poster' => 'the-expanse-639f15668446e594269390.jpeg', 'country' => 'France', 'year' => '2000', 'Category' => 'Comedie',],
+        ['Title' => 'Les aveuglants pâles', 'Synopsis' => "Des hommes et des magouilles", 'poster' => 'peakyfuckingblinders-639f157999511746369802.jpg', 'country' => 'France', 'year' => '2000', 'Category' => 'Comedie',],
     ];
 
     public function __construct(SluggerInterface $slugger)
