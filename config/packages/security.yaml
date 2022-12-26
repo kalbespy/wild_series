@@ -22,7 +22,9 @@ security:
                 enable_csrf: true
             logout:
                 path: app_logout
-
+    role_hierarchy:
+        ROLE_CONTRIBUTOR: ROLE_USER
+        ROLE_ADMIN: ROLE_CONTRIBUTOR
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -48,6 +50,3 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
-        role_hierarchy:
-            ROLE_CONTRIBUTOR: ROLE_USER
-            ROLE_ADMIN: ROLE_CONTRIBUTOR

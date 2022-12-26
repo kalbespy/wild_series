@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Entity\User;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
@@ -19,6 +20,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 #[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
@@ -52,6 +55,9 @@ class ProgramController extends AbstractController
             $slug = $slugger->slug($program->getTitle());
             $program->setSlug($slug);
 
+            // Set the program's owner
+            $program->setOwner($this->getUser());
+
             // Deal with the submitted data
             $programRepository->save($program, true);
 
@@ -79,6 +85,14 @@ class ProgramController extends AbstractController
     #[Route('/{slug}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Program $program, ProgramRepository $programRepository, SluggerInterface $slugger): Response
     {
+        //Check wether the logged in user is the owner of the program
+        if ($this->isGranted('ROLE_ADMIN') != true) {
+            if ($this->getUser() !== $program->getOwner()) {
+                // If not the owner, throws a 403 Access Denied exception
+                throw $this->createAccessDeniedException('Only the owner can edit the program!');
+            }
+        }
+
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 

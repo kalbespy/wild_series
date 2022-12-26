@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     #[Route('/index', name: 'app_comment_index')]
+    #[Route('/', name: 'app_comment_index')]
     public function index(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findAll();
@@ -25,7 +26,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_CONTRIBUTOR')]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, CommentRepository $commentRepository): Response
     {
         $comment = new Comment();
@@ -42,5 +43,54 @@ class CommentController extends AbstractController
             'comment' => $comment,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
+    public function show(Comment $comment): Response
+    {
+        return $this->render('comment/show.html.twig', [
+            'comment' => $comment,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    {
+        if ($this->isGranted('ROLE_ADMIN') != true) {
+            if ($this->getUser() !== $comment->getAuthor()) {
+                throw $this->createAccessDeniedException('Vous n\'êtes pas le propriétaire de ce commentaire !');
+            }
+        }
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentRepository->save($comment, true);
+
+            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('comment/edit.html.twig', [
+            'comment' => $comment,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    {
+        if ($this->isGranted('ROLE_ADMIN') != true) {
+            if ($this->getUser() !== $comment->getAuthor()) {
+                throw $this->createAccessDeniedException('Vous n\'êtes pas le propriétaire de ce commentaire !');
+            }
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
+            $commentRepository->remove($comment, true);
+        }
+
+        return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
     }
 }

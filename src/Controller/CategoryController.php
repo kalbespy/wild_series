@@ -7,6 +7,7 @@ use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\Mapping\Id;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,7 @@ class CategoryController extends AbstractController
 
     // route /category/new placée au dessus de la méthode show() car si placé après, le routeur de Symfony s'arrêtant à la première route qui "match", il va penser que tu veux afficher la catégorie qui a pour name "new" et tu auras une erreur 404.
     #[Route('/new', name: 'new')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
         // Create a new Category Object
