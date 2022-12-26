@@ -14,6 +14,16 @@
 					<a class="nav-link" href="/episode/">Episodes</a>
 
 					<a class="nav-link" href="#">Mes favoris</a>
+					{% if app.user %}
+						<span class="nav-link">
+							{{ app.user.email }}
+						</span>
+						<a class="nav-link" href="{{ path('app_logout') }}">
+							Se déconnecter</a>
+					{% else %}
+						<a class="nav-link" href="{{ path('app_login') }}">
+							Se connecter</a>
+					{% endif %}
 				</li>
 
 			</div>

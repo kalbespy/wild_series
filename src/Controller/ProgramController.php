@@ -26,8 +26,6 @@ class ProgramController extends AbstractController
     #[Route('/', methods: ['GET'], name: 'index')]
     public function index(RequestStack $requestStack, ProgramRepository $programRepository): Response
     {
-        $session = $requestStack->getSession();
-
         $programs = $programRepository->findAll();
 
         return $this->render(

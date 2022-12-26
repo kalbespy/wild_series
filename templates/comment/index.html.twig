@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommentController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Commentaires</h1>
+
+		<a href="{{ path('app_comment_new') }}">Create new</a>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Commentaire</th>
+					<th>Note</th>
+					<th>Episode</th>
+					<th>Auteur</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for comment in comments %}
+					<tr>
+						<td>{{ comment.id }}</td>
+						<td>{{ comment.comment }}</td>
+						<td>{{ comment.rate }}</td>
+						<td>{{ comment.episode.title }}</td>
+						<td>{{ comment.author.id }}</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_comment_new') }}">Create new</a>
+
+	</div>
+{% endblock %}

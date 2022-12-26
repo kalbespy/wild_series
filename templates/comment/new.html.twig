@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Noveau commentaire
+{% endblock %}
+
+{% block body %}
+	<h1>Rédiger un commentaire</h1>
+
+	{{ include('comment/_form.html.twig') }}
+
+	<a href="{{ path('app_episode_index') }}">Retour à la liste d'épisodes</a>
+{% endblock %}
