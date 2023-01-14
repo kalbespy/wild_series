@@ -7,6 +7,12 @@
 {% block body %}
 	<h1 class="m-4">Toutes les séries disponibles:
 	</h1>
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button>Search</button>
+	{{ form_end(form) }}
+
 	<a href="/program/new">
 		Ajouter une nouvelle série
 	</a>
