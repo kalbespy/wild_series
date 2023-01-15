@@ -14,3 +14,5 @@ require('bootstrap');
 import './bootstrap';
 
 console.log('Hello Webpack Encore !')
+
+import 'bootstrap-icons/font/bootstrap-icons.css';

@@ -40,6 +40,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\ManyToMany(targetEntity: Program::class, inversedBy: 'viewers')]
+    #[ORM\JoinTable(name: 'watchlist')]
+    private Collection $watchlist;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -186,5 +190,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    public function getWatchlist(): Collection
+    {
+        return $this->watchlist;
+    }
+
+    public function addToWatchlist(Program $program): self
+    {
+        if (!$this->watchlist->contains($program)) {
+            $this->watchlist[] = $program;
+        }
+
+        return $this;
+    }
+
+    public function removeFromWatchlist(Program $program): self
+    {
+        $this->watchlist->removeElement($program);
+
+        return $this;
+    }
+
+    public function isInWatchlist(Program $program): bool
+    {
+        if ($this->getWatchlist()->contains($program)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -10,6 +10,7 @@ use App\Form\ProgramType;
 use App\Form\SearchProgramType;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
+use App\Repository\UserRepository;
 use App\Service\ProgramDuration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -203,5 +204,27 @@ class ProgramController extends AbstractController
             'season' => $season,
             'episode' => $episode,
         ]);
+    }
+
+    #[Route('/{id}/watchlist', methods: ['GET', 'POST'], name: 'watchlist')]
+    public function addToWatchlist(int $id, Program $program, UserRepository $userRepository)
+    {
+
+        if (!$program) {
+            throw $this->createNotFoundException(
+                'No program with this id found in program\'s table.'
+            );
+        }
+
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        if ($user->isInWatchlist($program)) {
+            $user->removeFromWatchlist($program);
+        } else {
+            $user->addToWatchlist($program);
+        }
+        $userRepository->save($user, true);
+
+        return $this->redirectToRoute('program_show', ['slug' => $program->getSlug()], Response::HTTP_SEE_OTHER);
     }
 }
