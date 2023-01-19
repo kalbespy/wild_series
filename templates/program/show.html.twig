@@ -16,8 +16,8 @@
 			<div class="media-body">
 				<h1 class="mt-0">{{ program.title }}</h1>
 				<p>
-					<a class="watchlist pe-5" href="{{ path('program_watchlist', {id: program.id})}}">
-						<i class=" bigHeart bi {% if app.user and app.user.isInWatchlist(program) == true %} bi-heart-fill {% else %} bi-heart {% endif %}"></i>
+					<a id="watchlist" class="watchlist pe-5" href="{{ path('program_watchlist', {id: program.id})}}">
+						<i class="bigHeart bi {% if app.user and app.user.isInWatchlist(program) == true %} bi-heart-fill {% else %} bi-heart {% endif %}"></i>
 					</a>
 				</p>
 				<p>{{ program.synopsis }}</p>
